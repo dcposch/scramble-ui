@@ -1,0 +1,12 @@
+{
+    "dependencies": {
+        "react": "*",
+        "bootstrap": "*"
+    },
+    "devDependencies": {
+        "reactify": "*",
+        "browserify": "*",
+        "watchify": "*",
+        "http-server": "*"
+    }
+}

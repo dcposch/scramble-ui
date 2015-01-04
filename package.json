@@ -10,5 +10,9 @@
     "browserify": "*",
     "watchify": "*",
     "http-server": "*"
+  },
+  "scripts": {
+    "start": "npm run copy && watchify -t [reactify --harmony] jsx/*.jsx -o build/app.js & http-server build/",
+    "copy": "mkdir -p build && cp index.html build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/"
   }
 }

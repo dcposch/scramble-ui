@@ -1,12 +1,14 @@
 {
-    "dependencies": {
-        "react": "*",
-        "bootstrap": "*"
-    },
-    "devDependencies": {
-        "reactify": "*",
-        "browserify": "*",
-        "watchify": "*",
-        "http-server": "*"
-    }
+  "repository": "https://github.com/dcposch/scramble-ui",
+  "description": "Scramble.io UI components made with React and Browserify",
+  "dependencies": {
+    "react": "*",
+    "bootstrap": "*"
+  },
+  "devDependencies": {
+    "reactify": "*",
+    "browserify": "*",
+    "watchify": "*",
+    "http-server": "*"
+  }
 }

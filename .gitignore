@@ -1,4 +1,4 @@
 node_modules/
-app.js
+build/
 *.swp
 .module-cache

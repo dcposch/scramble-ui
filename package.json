@@ -3,6 +3,7 @@
   "description": "Scramble.io UI components made with React and Browserify",
   "dependencies": {
     "react": "*",
+    "react-addons": "*",
     "bootstrap": "*"
   },
   "devDependencies": {
@@ -13,6 +14,7 @@
   },
   "scripts": {
     "start": "npm run copy && watchify -t [reactify --harmony] jsx/*.jsx -o build/app.js & http-server build/",
+    "prepublish": "npm run copy && browserify -t [reactify --harmony] jsx/*.jsx -o build/app.js",
     "copy": "mkdir -p build && cp index.html build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/"
   }
 }

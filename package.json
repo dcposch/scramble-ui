@@ -1,20 +1,36 @@
 {
+  "name":"scramble-ui",
+  "version":"0.0.1",
+  "main":"src/index.jsx",
   "repository": "https://github.com/dcposch/scramble-ui",
   "description": "Scramble.io UI components made with React and Browserify",
+  "keywords": [
+    "react",
+    "react-component",
+    "scramble"
+  ],
   "dependencies": {
-    "react": "*",
-    "react-addons": "*",
-    "bootstrap": "*"
+    "react": "*"
   },
   "devDependencies": {
-    "reactify": "*",
     "browserify": "*",
+    "reactify": "*",
     "watchify": "*",
-    "http-server": "*"
+    "http-server": "*",
+    "bootstrap": "*"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
+    ]
   },
   "scripts": {
-    "start": "npm run copy && watchify -t [reactify --harmony] jsx/*.jsx -o build/app.js & http-server build/",
-    "prepublish": "npm run copy && browserify -t [reactify --harmony] jsx/*.jsx -o build/app.js",
-    "copy": "mkdir -p build && cp index.html build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/"
+    "start": "npm run copy && (watchify doc/*.jsx -o build/app.js & http-server build/)",
+    "copy": "mkdir -p build && cp doc/index.html build/ && cp node_modules/bootstrap/dist/css/bootstrap.min.css build/"
   }
 }

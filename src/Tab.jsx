@@ -8,10 +8,17 @@ var React = require("react");
  * You can give it an optional "brand" element (top left, link to /) and optional right element (top right, right aligned text).
  */
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {
+      "selected": this.props.tabs[0]
+    };
+  },
+
   propTypes: {
+    tabs: React.PropTypes.arrayOf(React.PropTypes.node).isRequired,
     brandElement: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.node]),
     rightElement: React.PropTypes.element,
-    tabs: React.PropTypes.arrayOf(React.PropTypes.node)
+    onClick: React.PropTypes.func
   },
 
   render: function() {
@@ -33,7 +40,8 @@ module.exports = React.createClass({
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
               {tabs.map(function(t){
-                return (<li><a href="#">{t}</a></li>);
+                var className = (t === this.state.selected) ? "active" : null;
+                return (<li className={className}><a href="#">{t}</a></li>);
               })}
             </ul>
             {rightElem}
@@ -43,3 +51,4 @@ module.exports = React.createClass({
     );
   }
 });
+

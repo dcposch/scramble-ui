@@ -3,8 +3,8 @@ var SearchListItem = require("./SearchListItem.jsx");
 
 module.exports = React.createClass({
   propTypes: {
-    elementFunc: React.PropTypes.func.isRequired,
     searchFunc: React.PropTypes.func.isRequired,
+    elementFunc: React.PropTypes.func.isRequired,
     onSelect: React.PropTypes.func
   },
 
@@ -13,7 +13,7 @@ module.exports = React.createClass({
   },
 
   onClickItem: function(d) {
-    this.setState({"selected":d});
+    this.setState({"selected": d});
     if(this.props.onSelect){
       this.props.onSelect(d);
     } 
@@ -37,7 +37,6 @@ module.exports = React.createClass({
         </SearchListItem>);
     }.bind(this));
 
-    var input 
     return (<div className="row">
         <div className="col-md-12">
           <div className="form-group">

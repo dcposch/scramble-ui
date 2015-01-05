@@ -1,5 +1,5 @@
-var React = require("react");
-var ReactAddons = require("react-addons");
+var React = require("react/addons");
+var ReactAddons = React.addons;
 
 module.exports = React.createClass({
   propTypes: {

@@ -18,7 +18,14 @@ module.exports = React.createClass({
     tabs: React.PropTypes.arrayOf(React.PropTypes.node).isRequired,
     brandElement: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.node]),
     rightElement: React.PropTypes.element,
-    onClick: React.PropTypes.func
+    onSelect: React.PropTypes.func
+  },
+  
+  onClick: function(t) {
+    this.setState({"selected": t});
+    if(this.props.onSelect) {
+      this.props.onSelect(t);
+    }
   },
 
   render: function() {
@@ -32,7 +39,7 @@ module.exports = React.createClass({
             <button type="button" className="navbar-toggle" data-toggle="collapse">
               <span className="sr-only">Toggle navigation</span>
               {tabs.map(function(t){
-                return (<span className="icon-bar"></span>);
+                return (<span className="icon-bar" key={t}></span>);
               })}
             </button>
             {brandElem}
@@ -41,8 +48,10 @@ module.exports = React.createClass({
             <ul className="nav navbar-nav">
               {tabs.map(function(t){
                 var className = (t === this.state.selected) ? "active" : null;
-                return (<li className={className}><a href="#">{t}</a></li>);
-              })}
+                return (<li className={className} key={t}>
+                    <a href="#" onClick={this.onClick.bind(this,t)}>{t}</a>
+                  </li>);
+              }.bind(this))}
             </ul>
             {rightElem}
           </div>

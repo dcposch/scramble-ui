@@ -1,24 +1,23 @@
 var React = require("react");
 var SearchList = require("..").SearchList;
+var Message = require("..").Message;
+var Dictionary = require("./Dictionary.js");
+var DictWords = Object.keys(Dictionary).sort()
+  .filter(function(x){return x>="A"});
 
 module.exports = React.createClass({
   getInitialState: function() {
     return {
-      "people": [
-        "Bob Chen", 
-        "Bob Smith", 
-        "John Smith",
-        "Bille Bob Joe", 
-        "Woodhouse"],
       "selected": null
     };
   },
 
   searchPeople: function(str){
-    str = str.toLowerCase();
-    return this.state.people.filter(function(p){
-      return p.toLowerCase().indexOf(str) > -1;
+    str = str.toUpperCase();
+    var ppl = DictWords.filter(function(p){
+      return p.indexOf(str) > -1;
     });
+    return ppl;
   },
 
   personToListElem: function(str) {
@@ -30,21 +29,28 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var word = this.state.selected;
+    var definition = Dictionary[word];
+
     return (
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <h1>SearchList</h1>
-              <p>SearchList represents a searchable, infinite-scrolling view into some data.
-              The data is not presented as a flat list, but as a result set.</p>
-            </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <h1>SearchList</h1>
+            <p>SearchList represents a searchable, paginated view into some data.</p>
+            <p>SearchList fetches data asynchronously. Just define the <code>searchFunc</code> callback. 
+            The result can either be a flat array or a result set defining <code>.size()</code> and <code>.get(from, to)</code>.</p>
+            <p>Finally, define the <code>elementFunc</code> callback to map items from your dataset to React components, which will be rendered into a list.</p>
           </div>
-          <div className="row">
-            <div className="col-md-6 split-screen">
-              <SearchList searchFunc={this.searchPeople} elementFunc={this.personToListElem} onSelect={this.onSelect} />
-            </div>
-            <div className="col-md-6 split-screen">
-              <Message name={this.state.selected} />
+        </div>
+        <div className="row">
+          <div className="col-md-6 split-screen">
+            <SearchList searchFunc={this.searchPeople} elementFunc={this.personToListElem} onSelect={this.onSelect} />
+          </div>
+          <div className="col-md-6 split-screen">
+            <h1>{word}</h1>
+            <div>
+            {definition}
             </div>
           </div>
         </div>

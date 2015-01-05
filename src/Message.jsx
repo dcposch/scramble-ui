@@ -2,7 +2,7 @@ var React = require("react");
 
 module.exports = React.createClass({
   propTypes: {
-    "name": React.PropTypes.string.isRequired
+    "name": React.PropTypes.string
   },
   render: function() {
     if(!this.props.name) {

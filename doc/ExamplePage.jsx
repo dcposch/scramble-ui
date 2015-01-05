@@ -1,9 +1,7 @@
 var React = require("react");
 var ScrambleUI = require("..");
 var Tab = ScrambleUI.Tab;
-var SearchList = ScrambleUI.SearchList;
-var Message = ScrambleUI.Message;
-var Contact = ScrambleUI.Contact;
+var ExampleSearchList = require("./ExampleSearchList.jsx");
 
 
 module.exports = React.createClass({
@@ -24,6 +22,7 @@ module.exports = React.createClass({
       <div>
         <Tab tabs={this.state.tabs} brandElement="Scramble UI" onSelect={this.onSelectTab} />
         <ExampleElem />
+        <div className="footer"></div>
       </div>
     );
   }

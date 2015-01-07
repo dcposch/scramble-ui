@@ -7,6 +7,15 @@ var DictWords = Object.keys(Dictionary).sort()
 
 module.exports = React.createClass({
   render: function() {
+    var subject = "This is just to say";
+    var body = "i drank the beers<br/>"+
+      "that were in the fridge<br/>"+
+      "and which you were probably<br/>"+
+      "keeping<br/>"+
+      "for tonight<br/>"+
+      "sorry brah<br/><br/>"+
+      "--jim";
+    var date = "2012-01-01";
     return (
       <div className="container">
         <div className="row">
@@ -17,6 +26,7 @@ module.exports = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
+            <Message from="bob@mcbobs.com" to={["joe@mcbobs.com"]} subject={subject} bodySanitizedHtml={body} date={date}/>
           </div>
         </div>
       </div>);

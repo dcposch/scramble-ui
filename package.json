@@ -11,7 +11,8 @@
   ],
   "dependencies": {
     "react": "*",
-    "react-bootstrap": "*"
+    "react-bootstrap": "*",
+    "moment-component": "*"
   },
   "devDependencies": {
     "browserify": "*",

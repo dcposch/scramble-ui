@@ -1,35 +1,30 @@
-var React = require("react");
+var React = require("react/addons");
+var Moment = require("moment-component");
 
 module.exports = React.createClass({
   propTypes: {
     "from": React.PropTypes.string,
     "to": React.PropTypes.array,
-    "body": React.PropTypes.string
+    "date": React.PropTypes.string,
+    "bodySanitizedHTML": React.PropTypes.string
   },
   render: function() {
-    if(!this.props.name) {
-      return (<div />);
-    }
     return (
       <div>
         <div className="panel panel-default">
-            <div className="panel-heading">
-                <small className="received pull-right">{{formatDate time format="lll"}}</small>
-                <div className="from">
-                    {this.props.from}
-                </div>
-                <small className="to">to 
-                    {this.props.to.join(",")}
-                </small>
-                <small><a href="#" className="pull-right">Show Original</a></small>
-            </div>
+          <div className="panel-heading">
+            <small className="received pull-right">{this.props.date}</small>
+            <div className="from">{this.props.from}</div>
+            <small className="to">to {this.props.to.join(",")}</small>
+            <small><a href="#" className="pull-right">Show Original</a></small>
+          </div>
 
-            <div id="body-{{hexMsgID}}" className="email-body panel-body {{#unless htmlBody}}still-decrypting{{/unless}}">{this.props.body}</div>
-            <div className="panel-body">{this.props.body}</div>
+          <div className="panel-body" dangerouslySetInnerHTML={{__html:this.props.bodySanitizedHtml}} />
         </div>
 
         <div className="email-compose"></div>
-    </div>
+      </div>
+    );
   }
 });
 

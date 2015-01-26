@@ -1,6 +1,6 @@
 var React = require("react");
 var BS = require("react-bootstrap");
-var SearchListItem = require("./SearchListItem.jsx");
+var SearchListItem = require("./SearchListItem");
 
 module.exports = React.createClass({
   propTypes: {

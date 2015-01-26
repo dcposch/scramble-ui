@@ -13,8 +13,7 @@ module.exports = React.createClass({
       "and which you were probably<br/>"+
       "keeping<br/>"+
       "for tonight<br/>"+
-      "sorry brah<br/><br/>"+
-      "--jim";
+      "sorry bro";
     var date = "2012-01-01";
     return (
       <div className="container">

@@ -1,7 +1,7 @@
 {
   "name":"scramble-ui",
   "version":"0.0.1",
-  "main":"src/index.jsx",
+  "main":"build/index.js",
   "repository": "https://github.com/dcposch/scramble-ui",
   "description": "Scramble.io UI components made with React and Browserify",
   "keywords": [
@@ -32,7 +32,8 @@
     ]
   },
   "scripts": {
-    "start": "npm run copy && (watchify doc/*.jsx -o build/app.js & http-server -c-1 build/)",
-    "copy": "mkdir -p build && cp doc/index.html build/ && cp -r node_modules/bootstrap/dist/* build/"
+    "prepublish": "npm run copy && jsx -x jsx --harmony src/ build/",
+    "copy": "mkdir -p build && cp -ur doc/index.html node_modules/bootstrap/dist/* build/",
+    "start": "watchify doc/*.jsx -o build/app.js & http-server -c-1 build/"
   }
 }

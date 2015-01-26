@@ -1,6 +1,6 @@
 var React = require("react");
 var ScrambleUI = require("..");
-var Tab = ScrambleUI.Tab;
+var Tabs = ScrambleUI.Tabs;
 var componentNames = ["SearchList", "Message", "MessageThread", "Contact"];
 // Bug somewhere in Reactify: when I make this a loop, it no longer works :(
 var components = {};
@@ -26,7 +26,7 @@ module.exports = React.createClass({
     var ExampleElem = components[componentName];
     return (
       <div>
-        <Tab tabs={this.state.tabs} brandElement="Scramble UI" onSelect={this.onSelectTab} />
+        <Tabs tabs={this.state.tabs} brandElement="Scramble UI" onSelect={this.onSelectTab} />
         <ExampleElem />
         <div className="footer"></div>
       </div>

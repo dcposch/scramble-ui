@@ -2,6 +2,7 @@ var React = require("react/addons");
 var Moment = require("moment-component");
 
 module.exports = React.createClass({
+  displayName: "Message",
   propTypes: {
     "from": React.PropTypes.string,
     "to": React.PropTypes.array,

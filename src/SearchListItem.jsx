@@ -2,16 +2,18 @@ var React = require("react/addons");
 var ReactAddons = React.addons;
 
 module.exports = React.createClass({
+  displayName: "SearchListItem",
+
   propTypes: {
-    data: React.PropTypes.any.isRequired,
     selected: React.PropTypes.bool,
     onClick: React.PropTypes.func
   },
 
-  onClick: function() {
-    if(this.props.onClick) {
-      this.props.onClick(this.props.data);
-    }
+  getDefaultProps: function() {
+    return {
+      selected:false,
+      onClick:function(){}
+    };
   },
 
   render: function() {
@@ -19,8 +21,9 @@ module.exports = React.createClass({
       "list-group-item": true,
       "active": this.props.selected
     });
-    return (<a href="#" className={classes} onClick={this.onClick}>
-          {this.props.children} 
-        </a>);
+    return (
+      <a href="#" className={classes} onClick={this.props.onClick}>
+        {this.props.children} 
+      </a>);
   }
 });

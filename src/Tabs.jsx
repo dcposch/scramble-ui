@@ -8,6 +8,8 @@ var React = require("react");
  * You can give it an optional "brand" element (top left, link to /) and optional right element (top right, right aligned text).
  */
 module.exports = React.createClass({
+  displayName: "Tabs",
+
   getInitialState: function() {
     return {
       "selected": this.props.tabs[0]

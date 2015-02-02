@@ -2,12 +2,17 @@ var React = require("react");
 var BS = require("react-bootstrap");
 var SearchListItem = require("./SearchListItem");
 
+
 module.exports = React.createClass({
+  displayName: "SearchList",
+
   propTypes: {
-    searchFunc: React.PropTypes.func.isRequired,
+    data: React.PropTypes.array.isRequired,
     elementFunc: React.PropTypes.func.isRequired,
-    pageSize: React.PropTypes.number,
-    onSelect: React.PropTypes.func
+    keyFunc: React.PropTypes.func,
+    onSearch: React.PropTypes.func,
+    onSelect: React.PropTypes.func,
+    pageSize: React.PropTypes.number
   },
 
   getInitialState: function() {
@@ -15,18 +20,21 @@ module.exports = React.createClass({
   },
 
   getDefaultProps: function() {
-    return {pageSize:10};
+    return {
+      keyFunc: function(d){return d},
+      onSelect: function(){},
+      pageSize:10
+    };
   },
 
   onClickItem: function(d) {
     this.setState({selected: d});
-    if(this.props.onSelect){
-      this.props.onSelect(d);
-    } 
+    this.props.onSelect(d);
   },
 
   onSearchType: function(ev) {
-    this.setState({query: ev.target.value, page:1});
+    // TODO: pagination
+    this.props.onSearch(ev.target.value);
   },
 
   onPageLeft: function() {
@@ -39,7 +47,7 @@ module.exports = React.createClass({
 
   render: function() {
     // Fetch the current page of data
-    var data = this.props.searchFunc(this.state.query);
+    var data = this.props.data;
     var dataIsArray = data.hasOwnProperty("length");
     var dataLen = dataIsArray ? data.length : data.size();
     var ixMin = (this.state.page-1)*this.props.pageSize;
@@ -48,35 +56,41 @@ module.exports = React.createClass({
 
     // Convert each item to a React element
     var elems = dataSlice.map(function(d){
-      var sel = this.state.selected === d;
       var elem = this.props.elementFunc(d);
-      return (<SearchListItem onClick={this.onClickItem} key={d} data={d} selected={sel}>
+      var key = this.props.keyFunc(d);
+      var sel = this.state.selected === key;
+      if(!key) {
+        throw "SearchList couldn't get key for data " + d;
+      }
+      return (
+        <SearchListItem key={key} onClick={this.onClickItem.bind(this, key)} selected={sel}>
           {elem}
         </SearchListItem>);
     }.bind(this));
 
     // Return the list, complete with search bar and pagination
     var leftDisabled = (ixMin===0), rightDisabled = (ixMax===dataLen);
-    return (<div>
-          <div className="form-group">
-            <input type="text" className="form-control" placeholder="Search" onChange={this.onSearchType}></input>
-          </div>
-          <div className="list-group">
-            {elems}
-          </div>
-          <div className="text-center">
-            <em>
-              <BS.Button onClick={leftDisabled?null:this.onPageLeft} bsStyle="link" bsSize="small" disabled={leftDisabled}>
-                <i className="glyphicon glyphicon-chevron-left"></i>
-              </BS.Button>
-              &nbsp;&nbsp;
-              Showing {ixMin+1} to {ixMax} of {dataLen}
-              &nbsp;&nbsp;
-              <BS.Button onClick={rightDisabled?null:this.onPageRight} bsStyle="link" bsSize="small" disabled={rightDisabled}>
-                <i className="glyphicon glyphicon-chevron-right"></i>
-              </BS.Button>
-            </em>
-          </div>
+    return (
+      <div>
+        <div className="form-group">
+          <input type="text" className="form-control" placeholder="Search" onChange={this.onSearchType}></input>
+        </div>
+        <div className="list-group">
+          {elems}
+        </div>
+        <div className="text-center">
+          <em>
+            <BS.Button onClick={leftDisabled?null:this.onPageLeft} bsStyle="link" bsSize="small" disabled={leftDisabled}>
+              <i className="glyphicon glyphicon-chevron-left"></i>
+            </BS.Button>
+            &nbsp;&nbsp;
+            Showing {ixMin+1} to {ixMax} of {dataLen}
+            &nbsp;&nbsp;
+            <BS.Button onClick={rightDisabled?null:this.onPageRight} bsStyle="link" bsSize="small" disabled={rightDisabled}>
+              <i className="glyphicon glyphicon-chevron-right"></i>
+            </BS.Button>
+          </em>
+        </div>
       </div>);
   }
 });

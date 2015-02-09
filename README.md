@@ -19,6 +19,19 @@ TODO: picture
 TODO: code sample
 
 
+## Quick Start
+
+* Install node and npm. On Ubuntu:
+
+        sudo apt-get install npm nodejs-legacy
+
+* Run `npm install`
+
+* Run `npm start`
+
+* Go to http://localhost:8080
+
+
 ## License
 
 Licensed under the GPLv3: http://www.gnu.org/licenses/gpl-3.0.html

@@ -18,6 +18,7 @@
     "browserify": "*",
     "reactify": "*",
     "watchify": "*",
+    "react-tools": "*",
     "http-server": "*",
     "bootstrap": "*"
   },

@@ -16,11 +16,13 @@
   },
   "devDependencies": {
     "browserify": "*",
+    "brfs": "*",
     "reactify": "*",
     "watchify": "*",
     "react-tools": "*",
     "http-server": "*",
-    "bootstrap": "*"
+    "bootstrap": "*",
+    "standard": "*"
   },
   "browserify": {
     "transform": [
@@ -29,12 +31,14 @@
         {
           "es6": true
         }
-      ]
+      ],
+      "brfs"
     ]
   },
   "scripts": {
     "prepublish": "npm run copy && jsx -x jsx --harmony src/ build/",
     "copy": "mkdir -p build && cp -ur doc/index.html node_modules/bootstrap/dist/* build/",
-    "start": "watchify doc/*.jsx -o build/app.js & http-server -c-1 build/"
+    "start": "watchify doc/*.jsx -o build/app.js & http-server -c-1 build/",
+    "test": "standard src doc"
   }
 }

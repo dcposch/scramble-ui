@@ -1,7 +1,10 @@
 var React = require("react");
 var SearchList = require("..").SearchList;
 var Message = require("..").Message;
-var Dictionary = require("./Dictionary.js");
+
+var fs = require("fs");
+var dictionaryJson = fs.readFileSync(__dirname + '/dictionary.json', 'utf8');
+var Dictionary = JSON.parse(dictionaryJson);
 var DictWords = Object.keys(Dictionary)
   .sort()
   .filter(function(x){return x>="A"});
